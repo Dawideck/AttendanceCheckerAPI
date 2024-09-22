@@ -1,11 +1,10 @@
 package com.AttendanceChecker.AttendanceCheckerAPI.dataClasses;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.ToString;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-//@AllArgsConstructor
-//@ToString
-//@Data
-public record Attendance(String date, String time, String classCode) {
+@Entity
+public record Attendance(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) int id, String date, String time, String classCode) {
 }

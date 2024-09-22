@@ -1,21 +1,29 @@
-package com.AttendanceChecker.AttendanceCheckerAPI.dataClasses;
+    package com.AttendanceChecker.AttendanceCheckerAPI.dataClasses;
 
+    import jakarta.persistence.*;
+    import lombok.Getter;
+    import lombok.ToString;
+    import java.util.List;
 
-import lombok.Getter;
-import lombok.ToString;
+    @Entity
+    @ToString(callSuper = true)
+    @Getter
+    public class Student extends Person {
 
-import java.util.ArrayList;
-import java.util.List;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private long studentId;
 
-@ToString(callSuper = true)
-@Getter
-public class Student extends Person {
-    private final List<Attendance> attendanceList;
-    private final int studentId;
+        @OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
+        @JoinColumn(name = "studentId")
+        private List<Attendance> attendanceList;
 
-    public Student(int studentId, List<Attendance> attendance, String name, String lastName) {
-        super(name, lastName);
-        this.studentId = studentId;
-        this.attendanceList = attendance;
+        public Student(List<Attendance> attendance, String name, String lastName) {
+            super(name, lastName);
+            this.attendanceList = attendance;
+        }
+
+        public Student(){
+            super();
+        }
     }
-}
